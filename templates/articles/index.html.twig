@@ -3,6 +3,11 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
+    {% for message in app.flashes('message') %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
     <p>Ici sera la liste des articles</p>
     {% for article in articles %}
         <h1><a href="{{ path('article', {"slug": article.slug}) }}">{{ article.titre }}</a></h1>
