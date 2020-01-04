@@ -19,6 +19,21 @@ class ArticlesRepository extends ServiceEntityRepository
         parent::__construct($registry, Articles::class);
     }
 
+    /**
+     * Retourne une liste d'articles pour l'API
+     *
+     * @return array
+     */
+    public function apiFindAll() : array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('a.id', 'a.titre', 'a.contenu', 'a.featured_image', 'a.created_at')
+            ->orderBy('a.created_at', 'DESC');
+
+        $query = $qb->getQuery();
+        return $query->execute();
+    }
+
     // /**
     //  * @return Articles[] Returns an array of Articles objects
     //  */

@@ -1,0 +1,7 @@
+DELETE https://127.0.0.1:8000/api/article/supprimer/6
+
+{
+    "titre": "Modifié par l'API",
+    "contenu": "<p>Contenu modifié par l'API</p>",
+    "image": "test.jpg"
+}
