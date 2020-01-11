@@ -26,7 +26,7 @@ class ArticlesController extends AbstractController
     }
 
     /**
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_EDITOR")
      * @Route("/article/nouveau", name="ajout_article")
      */
     public function ajoutArticle(Request $request){
@@ -95,4 +95,11 @@ class ArticlesController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/article/modifier/{id}", name="modif_article")
+     */
+    public function modifArticle(){
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        // Ici il faut être admin
+    }
 }
