@@ -2,6 +2,15 @@
     "behat/transliterator": {
         "version": "v1.2.0"
     },
+    "components/elfinder": {
+        "version": "3.1.3"
+    },
+    "components/jquery": {
+        "version": "3.4.1"
+    },
+    "components/jqueryui": {
+        "version": "1.12.1"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -111,11 +120,27 @@
     "gedmo/doctrine-extensions": {
         "version": "v2.4.37"
     },
+    "helios-ag/fm-elfinder-bundle": {
+        "version": "7.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "7.0",
+            "ref": "fb9152ee3538f968d9e0f2c763ecbe4ab63eff26"
+        },
+        "files": [
+            "./config/packages/fm_elfinder.yaml",
+            "./config/routes/fm_elfinder.yaml"
+        ]
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
     "jms/metadata": {
         "version": "2.1.0"
+    },
+    "kriswallsmith/assetic": {
+        "version": "v1.0.5"
     },
     "monolog/monolog": {
         "version": "1.25.1"
@@ -153,6 +178,9 @@
     "psr/log": {
         "version": "1.1.0"
     },
+    "robloach/component-installer": {
+        "version": "0.2.3"
+    },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
         "recipe": {
@@ -176,6 +204,9 @@
         "files": [
             "./config/packages/stof_doctrine_extensions.yaml"
         ]
+    },
+    "studio-42/elfinder": {
+        "version": "2.1.52"
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.2.1"
