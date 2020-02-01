@@ -8,6 +8,7 @@ use App\Repository\UsersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/admin", name="admin_")
@@ -40,7 +41,7 @@ class AdminController extends AbstractController
      *
      * @Route("/utilisateur/modifier/{id}", name="modifier_utilisateur")
      */
-    public function editUser(Users $user, Request $request){
+    public function editUser(Users $user, Request $request, TranslatorInterface $translator){
         $form = $this->createForm(EditUserType::class, $user);
         $form->handleRequest($request);
 
@@ -49,7 +50,9 @@ class AdminController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('message', 'Utilisateur modifié avec succès');
+            $message = $translator->trans('User modified successfully');
+
+            $this->addFlash('message', $message);
             return $this->redirectToRoute('admin_utilisateurs');
         }
 

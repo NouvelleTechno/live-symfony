@@ -17,7 +17,7 @@
     <div>{{ article.contenu|raw }}</div>
     <h2>{% trans %}Comments{% endtrans %} ({{ article.commentaires|length }})</h2>
     {% for commentaire in article.commentaires %}
-        <p>'Published by'|trans {{commentaire.pseudo }}</p>
+        <p>{% trans %}Published by{% endtrans %} {{commentaire.pseudo }}</p>
         <div>{{ commentaire.contenu }}</div>
     {% else %}
         <p>{% trans %}There's no comment yet{% endtrans %}</p>

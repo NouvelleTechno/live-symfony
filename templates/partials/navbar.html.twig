@@ -33,9 +33,16 @@
         {% endif %}
         {% if is_granted('ROLE_USER') %}
           <li class="nav-item">
-            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Profil</a>
+            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">{% trans %}Profile{% endtrans %}</a>
           </li>
       {% endif %}
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        {% for locale in locales if locale != app.request.locale %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('change_locale', {'locale': locale})}}"><img src="{{ asset('img/'~locale~'.png') }}" alt="{{locale}}"></a>
+          </li>
+        {% endfor %}
       </ul>
     </div>
   </nav>

@@ -8,10 +8,9 @@
             {{ message }}
         </div>
     {% endfor %}
-    <p>Ici sera la liste des articles</p>
     {% for article in articles %}
         <h1><a href="{{ path('article', {"slug": article.slug}) }}">{{ article.titre }}</a></h1>
-        <p>Publié le {{ article.createdAt|date('d/m/Y à h\\hi') }} </p>
+        <p>{% trans %}Published on{% endtrans %} {{ article.createdAt|date('d/m/Y à h\\hi') }} </p>
         <p>
             {% for categorie in article.categories %}
                 {{ categorie.nom }}
