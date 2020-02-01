@@ -10,15 +10,18 @@
             {{ categorie.nom }}
         {% endfor %}
     </p>
+    <p>
+        <img src="{{ vich_uploader_asset(article, 'imageFile')|imagine_filter('article') }}" alt="{{ article.titre }}">
+    </p>
+
     <div>{{ article.contenu|raw }}</div>
-    <h2>Commentaires ({{ article.commentaires|length }})</h2>
+    <h2>{% trans %}Comments{% endtrans %} ({{ article.commentaires|length }})</h2>
     {% for commentaire in article.commentaires %}
-        <p>Publié par {{commentaire.pseudo }}</p>
+        <p>'Published by'|trans {{commentaire.pseudo }}</p>
         <div>{{ commentaire.contenu }}</div>
     {% else %}
-        <p>Il n'y a pas encore de commentaire</p>
+        <p>{% trans %}There's no comment yet{% endtrans %}</p>
     {% endfor %}
-
     <h2>Ajouter un commentaire</h2>
     {{ form(commentForm) }}
     
