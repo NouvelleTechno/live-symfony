@@ -5,7 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     app.path.featured_images: /uploads/images/featured
-    app.locales: [en, fr, es]
+    app.locales: [en, fr]
     locale: en
 
 services:
