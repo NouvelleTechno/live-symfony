@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Users;
 use App\Form\RegistrationFormType;
+use App\Notifications\ActivationCompteNotification;
 use App\Repository\UsersRepository;
 use App\Security\UsersAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,9 +13,26 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use App\Notifications\CreationCompteNotification;
 
 class RegistrationController extends AbstractController
 {
+    /**
+     * @var CreationCompteNotification
+     */
+    private $notify_creation;
+
+    /**
+     * @var ActivationCompteNotification
+     */
+    private $notify_activation;
+
+    public function __construct(CreationCompteNotification $notify_creation, ActivationCompteNotification $notify_activation)
+    {
+        $this->notify_creation = $notify_creation;
+        $this->notify_activation = $notify_activation;
+    }
+
     /**
      * @Route("/inscription", name="app_register")
      */
@@ -41,23 +59,11 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             // do anything else you need here, like send an email
-            // On crée le message
-            $message = (new \Swift_Message('Activation de votre compte'))
-                // On attribue l'expéditeur
-                ->setFrom('votre@adresse.fr')
-                // On attribue le destinataire
-                ->setTo($user->getEmail())
-                // On crée le contenu
-                ->setBody(
-                    $this->renderView(
-                        'emails/activation.html.twig', ['token' => $user->getActivationToken()]
-                    ),
-                    'text/html'
-                )
-            ;
+            // Envoie le mail d'inscription à l'administrateur
+            $this->notify_creation->notify();
 
-            // On envoie l'e-mail
-            $mailer->send($message);
+            // Envoie le mail d'activation
+            $this->notify_activation->notify($user);
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
